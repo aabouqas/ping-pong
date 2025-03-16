@@ -6,8 +6,8 @@ from pygame import *
 
 pygame.init
 
-WIDTH = 640
-HEIGHT = 920
+WIDTH = 620
+HEIGHT = 1080
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("PING PONG")
@@ -21,13 +21,13 @@ i = 0
 
 
 PADDLE_WIDTH = 100
-PADDLE_HEIGHT = 10
+PADDLE_HEIGHT = 25
 # player = [[WIDTH / 2, HEIGHT], [WIDTH / 2, HEIGHT - 10], ]
 
 
 LEFT = 1
 RIGHT = 2
-BALL_SIZE = 15
+BALL_SIZE = 20
 playerMovmentSpeed = 0.5
 
 class Player:
@@ -38,6 +38,13 @@ class Player:
         self.y = y
     def getCourdinates(self):
         return [self.x, self.y]
+    def move(self):
+        if (keyPressed == K_LEFT and player1.x == 0) or (keyPressed == K_RIGHT and (player1.x + PADDLE_WIDTH) == WIDTH):
+            return
+        if keyPressed == K_LEFT:
+            self.x -= playerMovmentSpeed
+        if keyPressed == K_RIGHT:
+            self.x += playerMovmentSpeed
 class Ball:
     x = 0
     y = 0
@@ -53,16 +60,17 @@ class Ball:
     def getCourdinates(self):
         return [self.x, self.y]
 
-player = Player(WIDTH // 2 - (PADDLE_WIDTH // 2), HEIGHT - (PADDLE_HEIGHT // 2))
+player1 = Player(WIDTH // 2 - (PADDLE_WIDTH // 2), HEIGHT - (PADDLE_HEIGHT // 2))
+# player2 = Player(WIDTH // 2 - (PADDLE_WIDTH // 2), -15)
 ball = Ball(WIDTH / 2, HEIGHT / 2)
 
 def movePlayer():
-    if (keyPressed == K_LEFT and player.x == 0) or (keyPressed == K_RIGHT and (player.x + PADDLE_WIDTH)== WIDTH):
+    if (keyPressed == K_LEFT and player1.x == 0) or (keyPressed == K_RIGHT and (player1.x + PADDLE_WIDTH) == WIDTH):
         return
     if keyPressed == K_LEFT:
-        player.x -= playerMovmentSpeed
+        player1.x -= playerMovmentSpeed
     if keyPressed == K_RIGHT:
-        player.x += playerMovmentSpeed
+        player1.x += playerMovmentSpeed
 
 key_hold = True
 keyPressed = 0
@@ -88,22 +96,13 @@ while running:
             ball.directionX = 1
 
     if ball.y == W_BOTTOM:
-        if ball.x < player.x:
+        if ball.x < player1.x:
             running = False
-        if  ball.x > player.x + 100:
+        if  ball.x > player1.x + 100:
             running = False
-        # if ball.y == (HEIGHT - 20) and ball_courd[0] < player.x[0]:
-    #     running = False
-    #     if player.x < ball.x < player.x + PADDLE_WIDTH:
-    #         if player.x < ball.x < (player.x + PADDLE_WIDTH // 2):
-    #             ball.directionX *= -1
-    #         elif (player.x + PADDLE_WIDTH // 2) < ball.x < player.x + PADDLE_WIDTH:
-    #             ball.directionX *= 1
-    #         else:
-    #             ball.directionX = 0
 
-        if player.x < ball.x < player.x + PADDLE_WIDTH:
-            relative_impact = ((ball.x - player.x) / PADDLE_WIDTH) * 2 - 1
+        if player1.x < ball.x < (player1.x + PADDLE_WIDTH):
+            relative_impact = ((ball.x - player1.x) / PADDLE_WIDTH) * 2 - 1
             ball.directionX = relative_impact
         ball.directionY *= -1
         ball.speed -= 1
@@ -111,7 +110,8 @@ while running:
         ball.speed = 2
 
     pygame.draw.circle(screen, pygame.Color("red"), ball.getCourdinates(), BALL_SIZE)
-    pygame.draw.rect(screen, pygame.Color("red"), pygame.Rect(player.x, player.y, PADDLE_WIDTH, PADDLE_HEIGHT))
+    pygame.draw.rect(screen, pygame.Color("red"), pygame.Rect(player1.x, player1.y, PADDLE_WIDTH, PADDLE_HEIGHT))
+    # pygame.draw.rect(screen, pygame.Color("red"), pygame.Rect(player2.x, player2.y, PADDLE_WIDTH, PADDLE_HEIGHT))
 
     for envent in pygame.event.get():
         if envent.type == pygame.QUIT:
@@ -127,7 +127,7 @@ while running:
 
     if key_hold:
         if keyPressed == K_RIGHT or keyPressed == K_LEFT:
-            movePlayer()
+            player1.move()
 
     pygame.display.flip()
     i += 1
