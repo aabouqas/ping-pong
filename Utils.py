@@ -1,18 +1,20 @@
 WIDTH = 620
-HEIGHT = 1080
+HEIGHT = 720
 
 PADDLE_WIDTH = 100
-PADDLE_HEIGHT = 25
+PADDLE_HEIGHT = 10
 
 LEFT = 1
 RIGHT = 2
 BALL_SIZE = 20
-playerMovmentSpeed = 0.5
+playerMovmentSpeed = 0
 
 key_hold = True
 keyPressed = 0
 
 gravity = 0.1
 
+OFFSET = 15
 W_BOTTOM = HEIGHT - PADDLE_HEIGHT
 W_RIGHT = WIDTH - BALL_SIZE
+
