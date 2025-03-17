@@ -3,7 +3,7 @@ SRC = Ball.py Player.py Utils.py main.py
 
 all: $(SRC) .venv
 	source .venv/bin/activate && $(PY) main.py
-push:
+push: clean
 	@git add . && git commit -m "Done" && git push origin master
 
 .venv:
