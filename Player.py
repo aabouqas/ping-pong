@@ -7,7 +7,7 @@ class Player:
     y = 0
     speed: float = 0
     score = 0
-    def __init__(self, x, y, speed = 1):
+    def __init__(self, x, y, speed = 2):
         self.x = x
         if y == 0:
             self.y = OFFSET
@@ -32,5 +32,5 @@ class Player:
     def increaceScore(self, n):
         if self.score == 0:
             self.score = n
-        if self.score >= n:
+        if n >= self.score:
             self.score = n

@@ -8,10 +8,15 @@ class Ball:
     speed = 1
     directionX = 0
     directionY = 1
+    i = 1
     def __init__(self, x, y, speed = 0):
         self.x = x
         self.y = y
     def moveForward(self, player : Player):
+        self.i += 1
+
+        if self.i % 2 == 0:
+            return
         self.x += self.directionX
         self.y += self.directionY
         # if self.y >= W_BOTTOM - OFFSET or self.y < BALL_SIZE + OFFSET and self.x in range(player.x, player.x + PADDLE_WIDTH):

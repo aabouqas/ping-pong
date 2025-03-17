@@ -33,6 +33,7 @@ def putTextToWindow(text: str, x, y):
 play = True
 scoore = 0
 
+clock = pygame.time.Clock()
 while running:
     if not play:
         screen.fill(Color("black"))
@@ -46,21 +47,26 @@ while running:
                     running = False
                 elif envent.key == pygame.K_SPACE:
                     play = True
-        putTextToWindow(f"Max score : {scoore} / {player1.score}", WIDTH // 2, HEIGHT // 2)
+        putTextToWindow(f"Max score : {player1.score}", WIDTH // 2, HEIGHT // 2)
         putTextToWindow("Press space to continue", WIDTH // 2, (HEIGHT // 2) + 46)
         pygame.display.set_caption("Ping Pong")
         pygame.display.flip()
         continue
     screen.fill(Color("black"))
-    pygame.display.set_caption(f"Max score : {scoore} /  {player1.score}")
-    if i % ball.speed == 0:
-        ball.moveForward(player1)
+    if player1.score == 0:
+        pygame.display.set_caption(f"Score : {int(scoore)}")
+    else:
+        pygame.display.set_caption(f"Max score : {int(scoore)} /  {int(player1.score)}")
+    ball.moveForward(player1)
+
+    # print (ball.y >= W_BOTTOM - OFFSET - BALL_SIZE)
 
     if ball.y == W_BOTTOM - OFFSET - BALL_SIZE:
         if (ball.x < player1.x - BALL_SIZE) or (ball.x > player1.x + PADDLE_WIDTH + BALL_SIZE):
-            scoore = 0
             ball.reset()
-            player1.increaseScore(scoore)
+            player1.increaceScore(scoore)
+            # print(scoore)
+            scoore = 0
             play = False
             # running = False
         # if  ball.x > player1.x + PADDLE_WIDTH + BALL_SIZE:
@@ -71,12 +77,9 @@ while running:
         if player1.x < ball.x < (player1.x + PADDLE_WIDTH):
             relative_impact = ((ball.x - player1.x) / PADDLE_WIDTH) * 2 - 1
             ball.directionX = relative_impact
-            scoore += 1
-            print (scoore)
+            scoore += 0.5
         ball.directionY *= -1
-        # ball.speed -= 1
-    else:
-        ball.speed = 1
+
 
     pygame.draw.circle(screen, pygame.Color("red"), ball.getCourdinates(), BALL_SIZE)
     pygame.draw.rect(screen, pygame.Color("red"), pygame.Rect(player1.x, player1.y, PADDLE_WIDTH, PADDLE_HEIGHT))
@@ -99,8 +102,6 @@ while running:
             player1.move(keyPressed)
     player2.followBall(ball)
     pygame.display.flip()
-    i += 1
-    if i == 1000:
-        i = 0
+    # clock.tick(90)
 
 pygame.quit()
