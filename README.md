@@ -1,3 +1,3 @@
 # Ping Pong
 
-![][./image.png]
+![][image.png]
