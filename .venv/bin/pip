@@ -1,4 +1,4 @@
-#!/home/aabouqas/ping-pong/.venv/bin/python
+#!/goinfre/aabouqas/ping-pong/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

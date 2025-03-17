@@ -1,13 +1,10 @@
-#!.venv/bin/python3
-import random
-
 import pygame
 from pygame import *
+from Player import Player
+from Ball import Ball
+from Utils import *
 
-pygame.init
-
-WIDTH = 620
-HEIGHT = 1080
+pygame.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("PING PONG")
@@ -15,85 +12,19 @@ pygame.display.set_caption("PING PONG")
 running = True
 
 colors = [pygame.Color('red'), pygame.Color('blue'), pygame.Color('pink'), pygame.Color('yellow')]
-# WIDTH / 2, HEIGHT - 11
 i = 0
 
-
-
-PADDLE_WIDTH = 100
-PADDLE_HEIGHT = 25
-# player = [[WIDTH / 2, HEIGHT], [WIDTH / 2, HEIGHT - 10], ]
-
-
-LEFT = 1
-RIGHT = 2
-BALL_SIZE = 20
-playerMovmentSpeed = 0.5
-
-class Player:
-    x = 0
-    y = 0
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-    def getCourdinates(self):
-        return [self.x, self.y]
-    def move(self):
-        if (keyPressed == K_LEFT and player1.x == 0) or (keyPressed == K_RIGHT and (player1.x + PADDLE_WIDTH) == WIDTH):
-            return
-        if keyPressed == K_LEFT:
-            self.x -= playerMovmentSpeed
-        if keyPressed == K_RIGHT:
-            self.x += playerMovmentSpeed
-class Ball:
-    x = 0
-    y = 0
-    speed = 1
-    directionX = 0
-    directionY = 1
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-    def increace(self):
-        self.x += self.directionX
-        self.y += self.directionY
-    def getCourdinates(self):
-        return [self.x, self.y]
-
-player1 = Player(WIDTH // 2 - (PADDLE_WIDTH // 2), HEIGHT - (PADDLE_HEIGHT // 2))
-# player2 = Player(WIDTH // 2 - (PADDLE_WIDTH // 2), -15)
 ball = Ball(WIDTH / 2, HEIGHT / 2)
 
-def movePlayer():
-    if (keyPressed == K_LEFT and player1.x == 0) or (keyPressed == K_RIGHT and (player1.x + PADDLE_WIDTH) == WIDTH):
-        return
-    if keyPressed == K_LEFT:
-        player1.x -= playerMovmentSpeed
-    if keyPressed == K_RIGHT:
-        player1.x += playerMovmentSpeed
+player1 = Player(WIDTH // 2 - (PADDLE_WIDTH // 2), HEIGHT - (PADDLE_HEIGHT // 2))
+player2 = Player(WIDTH // 2 - (PADDLE_WIDTH // 2), -15)
 
-key_hold = True
-keyPressed = 0
 
-gravity = 0.1
-
-W_BOTTOM = HEIGHT - PADDLE_HEIGHT
-W_RIGHT = WIDTH - BALL_SIZE
 
 while running:
     screen.fill(Color("black"))
     if i % ball.speed == 0:
-
-        ball.increace()
-
-        if ball.y >= W_BOTTOM or ball.y < BALL_SIZE:
-            ball.directionY *= -1
-
-        if ball.x >= W_RIGHT or ball.x <= BALL_SIZE:
-            ball.directionX *= -1
-
-        if ball.y == W_BOTTOM and ball.directionX == 0:
-            ball.directionX = 1
+        ball.moveForward()
 
     if ball.y == W_BOTTOM:
         if ball.x < player1.x:
@@ -127,7 +58,7 @@ while running:
 
     if key_hold:
         if keyPressed == K_RIGHT or keyPressed == K_LEFT:
-            player1.move()
+            player1.move(keyPressed)
 
     pygame.display.flip()
     i += 1
