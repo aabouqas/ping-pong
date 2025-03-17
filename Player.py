@@ -29,3 +29,8 @@ class Player:
         if ball.x - PADDLE_WIDTH // 2 <= 0 or ball.x + PADDLE_WIDTH // 2 >= WIDTH:
             return
         self.x = ball.x - (PADDLE_WIDTH // 2) - self.speed
+    def increaceScore(self, n):
+        if self.score == 0:
+            self.score = n
+        if self.score >= n:
+            self.score = n

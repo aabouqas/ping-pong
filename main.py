@@ -31,6 +31,8 @@ def putTextToWindow(text: str, x, y):
     screen.blit(text_surface, text_rect)
 
 play = True
+scoore = 0
+
 while running:
     if not play:
         screen.fill(Color("black"))
@@ -44,20 +46,21 @@ while running:
                     running = False
                 elif envent.key == pygame.K_SPACE:
                     play = True
-        putTextToWindow(f"{player1.score} - {player2.score}", WIDTH // 2, HEIGHT // 2)
+        putTextToWindow(f"Max score : {scoore} / {player1.score}", WIDTH // 2, HEIGHT // 2)
         putTextToWindow("Press space to continue", WIDTH // 2, (HEIGHT // 2) + 46)
         pygame.display.set_caption("Ping Pong")
         pygame.display.flip()
         continue
     screen.fill(Color("black"))
-    pygame.display.set_caption(f"{player1.score} - {player2.score}")
+    pygame.display.set_caption(f"Max score : {scoore} /  {player1.score}")
     if i % ball.speed == 0:
         ball.moveForward(player1)
 
     if ball.y == W_BOTTOM - OFFSET - BALL_SIZE:
         if (ball.x < player1.x - BALL_SIZE) or (ball.x > player1.x + PADDLE_WIDTH + BALL_SIZE):
-            player2.score += 1
+            scoore = 0
             ball.reset()
+            player1.increaseScore(scoore)
             play = False
             # running = False
         # if  ball.x > player1.x + PADDLE_WIDTH + BALL_SIZE:
@@ -68,6 +71,8 @@ while running:
         if player1.x < ball.x < (player1.x + PADDLE_WIDTH):
             relative_impact = ((ball.x - player1.x) / PADDLE_WIDTH) * 2 - 1
             ball.directionX = relative_impact
+            scoore += 1
+            print (scoore)
         ball.directionY *= -1
         # ball.speed -= 1
     else:
