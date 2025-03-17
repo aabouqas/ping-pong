@@ -4,7 +4,7 @@ SRC = Ball.py Player.py Utils.py main.py
 all: $(SRC)
 	$(PY) main.py
 push:
-	git add . && git commit -m "Done" && git push origin master
+	@git add . && git commit -m "Done" && git push origin master
 
 install:
 	@if [ ! -d .venv ]; then \
