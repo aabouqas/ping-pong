@@ -5,11 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a796e17-2ec9-4435-9aa6-d632506ee22f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Ball.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ball.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player.py" beforeDir="false" afterPath="$PROJECT_DIR$/Player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/snake.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/bin/activate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/bin/activate.csh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/bin/activate.fish" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/bin/pip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/bin/pip3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/bin/python" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/bin/python3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/pyvenv.cfg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1742206029389</updated>
-      <workItem from="1742206031023" duration="13410000" />
+      <workItem from="1742206031023" duration="14229000" />
     </task>
     <servers />
   </component>

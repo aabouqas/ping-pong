@@ -1,18 +1,13 @@
 PY = python3
 SRC = Ball.py Player.py Utils.py main.py
 
-all: $(SRC)
-	$(PY) main.py
+all: $(SRC) .venv
+	source .venv/bin/activate && $(PY) main.py
 push:
 	@git add . && git commit -m "Done" && git push origin master
 
-install:
-	@if [ ! -d .venv ]; then \
-  		echo "Creating virtual envirement" \
-  		python3 -m venv .venv && .venv/bin/pip install -r requirements.txt; \
-	else \
-	  echo "Evrything is good"; \
-  	fi
+.venv:
+	@ echo "Creating virtual envirement" && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 clean:
 	@ rm -rf __pycache__
