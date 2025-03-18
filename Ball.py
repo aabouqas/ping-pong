@@ -1,5 +1,7 @@
+from wsgiref.validate import bad_header_value_re
+
 import Player
-from Utils import W_BOTTOM, W_RIGHT, BALL_SIZE, PADDLE_WIDTH, OFFSET, PADDLE_HEIGHT, HEIGHT, WIDTH
+from Utils import *
 
 
 class Ball:
@@ -26,20 +28,31 @@ class Ball:
         # if self.y >= W_BOTTOM - BALL_SIZE - OFFSET  and self.x in range(player.x, player.x + PADDLE_WIDTH):
         #     self.directionY *= -1
 
-        if self.y >= W_BOTTOM - OFFSET - BALL_SIZE and player.x < self.x < (player.x + PADDLE_WIDTH):
+        # if player is player1:
+
+        if self.x >= WIDTH - BALL_SIZE or self.x <= 0:
+            self.directionX *= -1
+            paddle_sound_wall.play()
+
+        if (self.y == HEIGHT - ball.get_height() - paddle.get_height() or self.y == paddle.get_height()) and player.x < self.x < (player.x + paddle.get_width()):
             self.directionY *= -1
-        elif self.y == W_BOTTOM or self.y < BALL_SIZE + OFFSET:
+            paddle_sound.play()
+            return
+        if self.y == HEIGHT - ball.get_height() - paddle.get_height() or self.y <= 0:
             self.directionY *= -1
+            paddle_sound.play()
+            return
+
         # if self.y >= W_BOTTOM - BALL_SIZE - OFFSET or self.y < BALL_SIZE + OFFSET:
         #     self.directionY *= -1
 
-        if self.x >= W_RIGHT or self.x <= BALL_SIZE:
-            self.directionX *= -1
+        # print(self.x, WIDTH)
+
         # if self.y == W_BOTTOM  and self.directionX == 0:
         #     self.directionX = 1
     def getCourdinates(self):
         return [self.x, self.y]
     def reset(self):
-        self.x = WIDTH // 2
+        self.x =  WIDTH // 2 - BALL_SIZE // 2
         self.y = HEIGHT // 2
         self.speed = 0.5
